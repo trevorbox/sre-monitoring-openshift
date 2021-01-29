@@ -22,6 +22,15 @@ helm upgrade -i --create-namespace grafana-operator helm/operator -n ${deploy_na
 
 > Note: you need to manually approve the InstallPlan to install the grafana-operator
 
+## Deploy rbac to allow csv maintenance for developer01 user (changing image)
+
+> Note: this is just an example, you would normally want to map the rolebinding to a group
+> Additionally, a ClusterRole could also be used instead of a Role
+
+```sh
+helm upgrade -i csv-maintainer helm/rbac -n ${deploy_namespace}
+```
+
 ## Optional - update dashboards for your OCP version
 
 This will update the json files within helm/grafana/dashboards/openshift-monitoring.

@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: csv-maintainer
+subjects:
+  # Note: this could also be a group
+  - kind: User
+    apiGroup: rbac.authorization.k8s.io
+    name: developer01 
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: csv-maintainer
