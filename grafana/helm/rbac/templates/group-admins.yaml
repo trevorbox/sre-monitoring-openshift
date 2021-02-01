@@ -1,0 +1,8 @@
+---
+apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  name: {{ printf "admins-%v" .Release.Namespace }}
+users:
+  {{- toYaml .Values.admins | nindent 2 }}
+...

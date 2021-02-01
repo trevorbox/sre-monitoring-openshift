@@ -22,13 +22,16 @@ helm upgrade -i --create-namespace grafana-operator helm/operator -n ${deploy_na
 
 > Note: you need to manually approve the InstallPlan to install the grafana-operator
 
-## Deploy rbac to allow csv maintenance for developer01 user (changing image)
+## Deploy rbac to allow namespaced operator maintenance
 
-> Note: this is just an example, you would normally want to map the rolebinding to a group
-> Additionally, a ClusterRole could also be used instead of a Role
+This will allow a group to upgrade namespaced operators as well as modify the CSVs. A cluster admin will still need to create the OperatorGroup in the desired namespace.
+
+Although InstallPlans are viewable at the cluster scope you can only approve the InstallPlans in the namespace you have access to.
+
+Additionally, CSVs created cluster wide are editable. Changes to them won't be overwritten. However, if they are deleted they are recreated.
 
 ```sh
-helm upgrade -i csv-maintainer helm/rbac -n ${deploy_namespace}
+helm upgrade -i rbac helm/rbac -n ${deploy_namespace}
 ```
 
 ## Optional - update dashboards for your OCP version

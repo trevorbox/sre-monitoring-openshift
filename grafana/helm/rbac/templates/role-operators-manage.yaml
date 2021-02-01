@@ -1,12 +1,14 @@
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: csv-maintainer
+  name: operators-manage
 rules:
   - verbs:
-      - update
       - patch
+      - update
+      - get
     apiGroups:
       - operators.coreos.com
     resources:
+      - installplans
       - clusterserviceversions
